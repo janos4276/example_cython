@@ -1,14 +1,17 @@
 from distutils.core import setup, Extension
 from Cython.Build import cythonize
 
-ext_utils = Extension('utils.anonymiser',
-                      sources=['utils/cython/anonymiser.pyx', 'utils/cython/Anonymiser.cpp'],
+ext_utils = Extension('utils.anon',
+                      sources=['utils/cython/anon.pyx', 'utils/cython/Anonymiser.cpp'],
+                      #include_dirs=['utils/cython'],
                       libraries=['ssl', 'crypto'],
-                      extra_compile_args=['-std=c++11 -fno-strict-prototypes'],
+                      extra_compile_args=['-std=c++11', '-Os'],
                       language='c++',
-)
-
+                      )
 
 setup(name='example_cython',
-      ext_modules=cythonize([ext_utils])
-)
+      packages=['utils'],
+      #package_dirs=['utils'],
+      #package_data={'utils': ['cython/*.h', 'cython/*.c', 'cython/*.cpp', 'cython/*.pyx']},
+      ext_modules=cythonize([ext_utils]),
+      )
