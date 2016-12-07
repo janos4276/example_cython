@@ -67,6 +67,7 @@ if __name__ == '__main__':
                                     )
                       )
     print('Python time: {time:.9f}'.format(time=python_time))
+    print('Python time per call: {time:.3e}'.format(time=python_time / (number_of_trails * len(macs))))
 
     print('\n')
 
@@ -79,7 +80,7 @@ if __name__ == '__main__':
                                     )
                       )
     print('Cython time: {time:.9f}'.format(time=cython_time))
-
+    print('Cython time per call: {time:.3e}'.format(time=cython_time / (number_of_trails*len(macs))))
     print('\n')
 
     print("Speed gain: {gain:.3f}".format(gain=python_time / cython_time))
