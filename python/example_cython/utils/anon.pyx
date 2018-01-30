@@ -2,7 +2,7 @@
 
 from libcpp.string cimport string
 
-cdef extern from 'Anonymiser.h' namespace 'adelost':
+cdef extern from 'cpp/Anonymiser.h' namespace 'adelost':
     cdef cppclass Anonymiser:
         Anonymiser(const string& salt)
         int hash(const string& pii)
@@ -11,7 +11,7 @@ cdef extern from 'Anonymiser.h' namespace 'adelost':
 cdef class Anon:
     cdef Anonymiser *_this_ptr
 
-    def __cinit__(self, bytes salt=<bytes>''):
+    def __cinit__(self, bytes salt=b''):
         self._this_ptr = new Anonymiser(salt)
 
     def __dealloc__(self):
